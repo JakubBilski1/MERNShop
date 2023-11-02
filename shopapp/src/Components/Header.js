@@ -9,9 +9,9 @@ function Header() {
             <img src={logo} alt="logo" className="w-[150px]" />
             <div className="flex gap-[15px] text-white">
                 <Link to={'/'} className="hover:text-gray-500 transition duration-300 linear">Home</Link>
-                <a href="/" className="hover:text-gray-500 transition duration-300 linear">About</a>
+                <Link to={'/about'} className="hover:text-gray-500 transition duration-300 linear">About</Link>
                 <Link to={'/products'} className="hover:text-gray-500 transition duration-300 linear">Products</Link>
-                <a href="/" className="hover:text-gray-500 transition duration-300 linear">Contact</a>
+                <Link to={'/contact'} className="hover:text-gray-500 transition duration-300 linear">Contact</Link>
                 <a href="/" className="hover:text-gray-500 transition duration-300 linear">Cart</a>
             </div>
         </header>
