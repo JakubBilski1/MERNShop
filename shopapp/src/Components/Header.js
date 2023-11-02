@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 function Header() {
     return (
         <header className="flex justify-between items-center p-[20px]" style={{background: 'rgb(41, 41, 41)'}}>
-            <img src={logo} alt="logo" className="w-[150px]" />
+            <Link to={'/'}><img src={logo} alt="logo" className="w-[150px]" /></Link>
             <div className="flex gap-[15px] text-white">
                 <Link to={'/'} className="hover:text-gray-500 transition duration-300 linear">Home</Link>
                 <Link to={'/about'} className="hover:text-gray-500 transition duration-300 linear">About</Link>

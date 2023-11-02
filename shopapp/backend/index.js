@@ -20,8 +20,13 @@ const client = new MongoClient(uri, {
   }
 });
 
+client.connect()
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
 app.post('/products', async (req, res) => {
-  await client.connect();
   try {
     const db = client.db(dbName);
     const collection = db.collection(collectionName);
@@ -30,31 +35,47 @@ app.post('/products', async (req, res) => {
   } catch (error) {
     console.error('Error connecting to MongoDB:', error);
     res.status(500).send('Internal Server Error');
-  }finally{
-    await client.close();
   }
 });
 
-app.post('/products/:id', async (req, res) => {
-  await client.connect();
+const router = express.Router();
+
+router.post('/id/:id', async (req, res) => {
   try {
     const db = client.db(dbName);
     const collection = db.collection(collectionName);
     const productId = parseInt(req.params.id);
-    const query = {id: productId};
+    const query = { id: productId };
     const product = await collection.findOne(query);
     return res.json(product);
   } catch (error) {
     console.error('Error connecting to MongoDB:', error);
     res.status(500).send('Internal Server Error');
-  }finally{
-    await client.close();
   }
 });
 
-app.post('/', (req, res) => {
-  res.send('Hello World!');
+router.post('/p/:shortName', async (req, res) => {
+  try {
+    const db = client.db(dbName);
+    const collection = db.collection(collectionName);
+    const shortName = req.params.shortName;
+    const query = { shortName: shortName };
+    const product = await collection.findOne(query);
+    
+    if (!product) {
+      res.status(404).json({ error: 'Product not found' });
+    } else {
+      res.json(product);
+    }
+  } catch (error) {
+    console.error('Error connecting to MongoDB:', error);
+    res.status(500).send('Internal Server Error');
+  }
 });
+
+app.use('/products', router);
+
+client.close();
 
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);

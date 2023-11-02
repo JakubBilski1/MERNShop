@@ -1,20 +1,12 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { Link } from 'react-router-dom'
 
-function Main() {
-  const [data, setData] = useState([])
-  useEffect(() => {
-    axios.post('http://localhost:5000/products')
-    .then(res => setData(res.data))
-    .catch(err => console.log(err))
-  }, [])
-  console.log(data)
+function Products(props) {
   return (
     <main className="flex flex-wrap gap-[30px] items-center justify-center p-[20px]" style={{background: '#4d4d4d'}}>
-      {data.map((item) => {
+      {props.data.map((item) => {
         return (
-          <div key={item.id} className="flex flex-col w-[250px] h-[450px]">
+          <Link to={`/products/p/${item.shortName}`} key={item.id} className="flex flex-col w-[250px] h-[450px]">
             <div>
               <img src={`https://gymbrothers.pl/productImages/${item.image}`} alt={item.title} className="w-[250px] h-[300px]" />
             </div>
@@ -23,11 +15,11 @@ function Main() {
               <p className="text-white">{item.brand}</p>
               <p className="text-white">{item.price}</p>
             </div>
-          </div>
+          </Link>
         )
       })}
     </main>
   )
 }
 
-export default Main
+export default Products
