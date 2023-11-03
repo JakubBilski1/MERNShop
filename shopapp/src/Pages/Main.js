@@ -12,7 +12,7 @@ function Main() {
     }, [])
     return (
       <main className="flex items-center justify-center bg-gray-800 p-[50px]">
-        <div className="bg-gray-700 text-white p-8 rounded-lg shadow-xl w-5/6 lg:w-2/3 xl:w-1/2">
+        {data ? <div className="bg-gray-700 text-white p-8 rounded-lg shadow-xl w-5/6 lg:w-2/3 xl:w-1/2">
           <div className="flex">
             <div className="w-1/3">
               <img
@@ -27,7 +27,7 @@ function Main() {
               <p className="text-yellow-400 font-semibold text-3xl">${data.price}</p>
             </div>
           </div>
-        </div>
+        </div> : <h1>You have no internet connection</h1>}
       </main>
     );
        

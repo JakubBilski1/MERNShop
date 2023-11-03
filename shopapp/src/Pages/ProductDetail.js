@@ -12,10 +12,15 @@ function ProductDetail(props) {
   return (
     <div>
       {product && 
-        <div>
+        <div className="flex">
+          <div className="w-1/4">
+            <img src={`https://gymbrothers.pl/productImages/${product.image}`} alt={product.title} />
+          </div>
+          <div>
             <h2>{product.title}</h2>
             <p>{product.brand}</p>
             <p>{product.price}</p>
+          </div>
         </div>
       }
     </div>
