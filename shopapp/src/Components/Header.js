@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function Header() {
     return (
-        <header className="flex justify-between items-center p-[20px]" style={{background: 'rgb(41, 41, 41)'}}>
+        <header className="flex justify-between items-center p-[20px] fixed top-0 w-[100%]" style={{background: 'rgb(41, 41, 41)'}}>
             <Link to={'/'}><img src={logo} alt="logo" className="w-[150px]" /></Link>
             <div className="flex gap-[15px] text-white">
                 <Link to={'/'} className="hover:text-gray-500 transition duration-300 linear">Home</Link>
