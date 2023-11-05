@@ -2,6 +2,8 @@ import React from 'react'
 import "../index.css"
 import logo from '../Images/logo-no-background.png';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 function Header() {
     return (
@@ -13,6 +15,7 @@ function Header() {
                 <Link to={'/products'} className="hover:text-gray-500 transition duration-300 linear">Products</Link>
                 <Link to={'/contact'} className="hover:text-gray-500 transition duration-300 linear">Contact</Link>
                 <a href="/" className="hover:text-gray-500 transition duration-300 linear">Cart</a>
+                <Link to={'/login'}><FontAwesomeIcon icon={faUser} /></Link>
             </div>
         </header>
     )
