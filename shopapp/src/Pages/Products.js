@@ -25,7 +25,7 @@ function Products(props) {
   return (
       <main className="flex justify-between" style={{ background: '#4d4d4d' }}>
         {/* dodaj tutaj panel ktory bedzie znajdowal sie po lewej stronie ekranu ma on byc wysoki na cala dlugosc i szeroki na 25%, zmien szerokosc diva z produktami na 75%, ma on takze byc przyklejony do ekranu i nie ma sie scrollowac z ekranem */}:
-        <div className="flex flex-col gap-[20px] w-[15%] h-[86.8vh] bg-gray-800 p-[20px] fixed bottom-0">
+        <div className="flex flex-col gap-[20px] w-[15%] h-[100%] bg-gray-800 p-[20px] fixed bottom-0">
           <h1 className="text-white text-4xl">Filters</h1>
           <div className="flex flex-col gap-[10px]">
             <h2 className="text-white text-xl">Brand</h2>
@@ -65,7 +65,7 @@ function Products(props) {
           </form>
           {/*filteredData.length === 0 && pricesData.length !==0 && <h1 className="text-white text-4xl">No products found</h1>*/}
         </div>
-        <div className="flex flex-wrap gap-[30px] items-center justify-center p-[50px] w-[85%] pt-[160px]">
+        <div className="flex flex-wrap gap-[30px] items-center justify-center p-[50px] w-[85%]">
           {filteredData.length !== 0 ? filteredData.map((item) => {
             return (
               <Link to={`/products/p/${item.shortName}`} key={item.id} className="flex flex-col w-[250px] h-[450px]">
