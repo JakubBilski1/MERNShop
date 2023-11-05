@@ -1,0 +1,426 @@
+[
+    {
+        "id": 1,
+        "title": "Jumpman MVP",
+        "description": "The Jumpman MVP is a high-performance basketball shoe designed for the modern athlete. With a sleek, low-cut design and advanced cushioning technology, these shoes provide superior comfort and support on the court. The durable rubber outsole provides excellent traction, while the lightweight upper allows for maximum mobility. Whether you're a seasoned pro or just starting out, the Jumpman MVP is the perfect shoe for any basketball player looking to take their game to the next level.",
+        "price": 799.99,
+        "brand": "Nike",
+        "type": "buty",
+        "popularity_level": 2,
+        "image": "product1.webp",
+        "shortName": "jumpman-mvp",
+        "sportsman": "Michael Jordan",
+        "sizes": {
+            "36": 1,
+            "38": 3,
+            "40": 2,
+            "42": 5,
+            "44": 2,
+            "46": 0
+        }
+    },
+    {
+        "id": 2,
+        "title": "Luka 2",
+        "description": "The Luka 2 is a stylish and comfortable basketball shoe designed for players who demand the best. Featuring a lightweight and breathable upper, these shoes provide excellent support and stability on the court. The advanced cushioning technology helps to absorb impact and reduce fatigue, while the durable rubber outsole provides excellent traction. With its sleek design and superior performance, the Luka 2 is the perfect shoe for any basketball player looking to elevate their game.",
+        "price": 599.99,
+        "brand": "Nike",
+        "type": "buty",
+        "popularity_level": 5,
+        "image": "product2.webp",
+        "shortName": "jordan-luka-two",
+        "sportsman": "Luka Dončić",
+        "sizes": {
+            "36": 4,
+            "38": 6,
+            "40": 5,
+            "42": 8,
+            "44": 3,
+            "46": 1
+        }
+    },
+    {
+        "id": 3,
+        "title": "Jordan Why Not .6",
+        "description": "The Jordan Why Not .6 is a high-performance basketball shoe designed for the modern athlete. With a sleek, low-cut design and advanced cushioning technology, these shoes provide superior comfort and support on the court. The durable rubber outsole provides excellent traction, while the lightweight upper allows for maximum mobility. Whether you're a seasoned pro or just starting out, the Jordan Why Not .6 is the perfect shoe for any basketball player looking to take their game to the next level.",
+        "price": 699.99,
+        "brand": "Nike",
+        "type": "buty",
+        "popularity_level": 1,
+        "image": "product3.jpeg",
+        "shortName": "jordan-why-not",
+        "sportsman": "Russell Westbrook",
+        "sizes": {
+            "36": 0,
+            "38": 2,
+            "40": 4,
+            "42": 1,
+            "44": 5,
+            "46": 3
+        }
+    },
+    {
+        "id": 4,
+        "title": "Luka 1",
+        "description": "The Luka 1 is a stylish and comfortable basketball shoe designed for players who demand the best. Featuring a lightweight and breathable upper, these shoes provide excellent support and stability on the court. The advanced cushioning technology helps to absorb impact and reduce fatigue, while the durable rubber outsole provides excellent traction. With its sleek design and superior performance, the Luka 1 is the perfect shoe for any basketball player looking to elevate their game.",
+        "price": 499.99,
+        "brand": "Nike",
+        "type": "buty",
+        "popularity_level": 3,
+        "image": "product4.jpeg",
+        "newPrice": 449.99,
+        "shortName": "jordan-luka-one",
+        "sportsman": "Luka Dončić",
+        "sizes": {
+            "36": 2,
+            "38": 5,
+            "40": 3,
+            "42": 4,
+            "44": 6,
+            "46": 2
+        }
+    },
+    {
+        "id": 5,
+        "title": "Zion 2",
+        "description": "The Zion 2 is a high-performance basketball shoe designed for the modern athlete. With a sleek, low-cut design and advanced cushioning technology, these shoes provide superior comfort and support on the court. The durable rubber outsole provides excellent traction, while the lightweight upper allows for maximum mobility. Whether you're a seasoned pro or just starting out, the Zion 2 is the perfect shoe for any basketball player looking to take their game to the next level.",
+        "price": 549.99,
+        "brand": "Nike",
+        "type": "buty",
+        "popularity_level": 3,
+        "image": "product5.webp",
+        "newPrice": 499.99,
+        "shortName": "jordan-zion-two",
+        "sportsman": "Zion Williamson",
+        "sizes": {
+            "36": 3,
+            "38": 6,
+            "40": 4,
+            "42": 5,
+            "44": 3,
+            "46": 2
+        }
+    },
+    {
+        "id": 6,
+        "title": "Air Jordan Legacy 312 Low",
+        "description": "The Air Jordan Legacy 312 Low is a high-performance basketball shoe designed for the modern athlete. With a sleek, low-cut design and advanced cushioning technology, these shoes provide superior comfort and support on the court. The durable rubber outsole provides excellent traction, while the lightweight upper allows for maximum mobility. Whether you're a seasoned pro or just starting out, the Air Jordan Legacy 312 Low is the perfect shoe for any basketball player looking to take their game to the next level.",
+        "price": 649.99,
+        "brand": "Nike",
+        "type": "buty",
+        "popularity_level": 4,
+        "image": "product6.webp",
+        "shortName": "jordan-legacy-low-first",
+        "sportsman": "Michael Jordan",
+        "sizes": {
+            "36": 1,
+            "38": 5,
+            "40": 4,
+            "42": 7,
+            "44": 3,
+            "46": 0
+        }
+    },
+    {
+        "id": 7,
+        "title": "Jordan Stay Loyal 2",
+        "description": "The Jordan Stay Loyal 2 is a high-performance basketball shoe designed for the modern athlete. With a sleek, low-cut design and advanced cushioning technology, these shoes provide superior comfort and support on the court. The durable rubber outsole provides excellent traction, while the lightweight upper allows for maximum mobility. Whether you're a seasoned pro or just starting out, the Jordan Stay Loyal 2 is the perfect shoe for any basketball player looking to take their game to the next level.",
+        "price": 549.99,
+        "brand": "Nike",
+        "type": "buty",
+        "popularity_level": 2,
+        "image": "product7.webp",
+        "shortName": "jordan-stay-loyal-two",
+        "sportsman": "Michael Jordan",
+        "sizes": {
+            "36": 2,
+            "38": 4,
+            "40": 5,
+            "42": 3,
+            "44": 4,
+            "46": 2
+        }
+    },
+    {
+        "id": 8,
+        "title": "Air Jordan Legacy 312 Low",
+        "description": "The Air Jordan Legacy 312 Low is a high-performance basketball shoe designed for the modern athlete. With a sleek, low-cut design and advanced cushioning technology, these shoes provide superior comfort and support on the court. The durable rubber outsole provides excellent traction, while the lightweight upper allows for maximum mobility. Whether you're a seasoned pro or just starting out, the Air Jordan Legacy 312 Low is the perfect shoe for any basketball player looking to take their game to the next level.",
+        "price": 699.99,
+        "brand": "Nike",
+        "type": "buty",
+        "popularity_level": 3,
+        "image": "product8.jpeg",
+        "shortName": "jordan-legacy-low-second",
+        "sportsman": "Michael Jordan",
+        "sizes": {
+            "36": 3,
+            "38": 6,
+            "40": 4,
+            "42": 5,
+            "44": 2,
+            "46": 1
+        }
+    },
+    {
+        "id": 9,
+        "title": "Tatum 1 „Pink Lemonade”",
+        "description": "The Tatum 1 Pink Lemonade is a high-performance basketball shoe designed for the modern athlete. With a sleek, low-cut design and advanced cushioning technology, these shoes provide superior comfort and support on the court. The durable rubber outsole provides excellent traction, while the lightweight upper allows for maximum mobility. Whether you're a seasoned pro or just starting out, the Tatum 1 Pink Lemonade is the perfect shoe for any basketball player looking to take their game to the next level.",
+        "price": 429.99,
+        "brand": "Nike",
+        "type": "buty",
+        "popularity_level": 5,
+        "image": "product9.webp",
+        "shortName": "jordan-tatum-one-lemonade",
+        "sportsman": "Jayson Tatum",
+        "sizes": {
+            "36": 4,
+            "38": 6,
+            "40": 5,
+            "42": 4,
+            "44": 3,
+            "46": 2
+        }
+    },
+    {
+        "id": 10,
+        "title": "Air Jordan 1 Retro High OG",
+        "description": "The Air Jordan 1 Retro High OG is a high-performance basketball shoe designed for the modern athlete. With a sleek, low-cut design and advanced cushioning technology, these shoes provide superior comfort and support on the court. The durable rubber outsole provides excellent traction, while the lightweight upper allows for maximum mobility. Whether you're a seasoned pro or just starting out, the Air Jordan 1 Retro High OG is the perfect shoe for any basketball player looking to take their game to the next level.",
+        "price": 879.99,
+        "brand": "Nike",
+        "type": "buty",
+        "popularity_level": 1,
+        "image": "product10.jpeg",
+        "shortName": "air-jordan-retro-one",
+        "sportsman": "Michael Jordan",
+        "sizes": {
+            "36": 3,
+            "38": 5,
+            "40": 4,
+            "42": 6,
+            "44": 2,
+            "46": 1
+        }
+    },
+    {
+        "id": 11,
+        "title": "Buty koszykarskie MB.01 Disco Lo",
+        "description": "Buty koszykarskie MB.01 Disco Lo to wysoko wydajne buty koszykarskie zaprojektowane dla nowoczesnych sportowców. Dzięki smukłemu, niskiemu kroju i zaawansowanej technologii amortyzacji, te buty zapewniają wyjątkowy komfort i wsparcie na boisku. Wytrzymała podeszwa z gumy gwarantuje doskonałą przyczepność, a lekka cholewka umożliwia maksymalną mobilność. Niezależnie od tego, czy jesteś doświadczonym zawodowcem, czy dopiero zaczynasz, buty koszykarskie MB.01 Disco Lo są idealnym wyborem dla tych, którzy chcą grać w stylu LaMelo Ball.",
+        "price": 809.00,
+        "brand": "Puma",
+        "type": "buty",
+        "popularity_level": 1,
+        "image": "product11.png",
+        "shortName": "puma-melo-ball-one",
+        "sportsman": "LaMelo Ball",
+        "sizes": {
+            "36": 2,
+            "38": 4,
+            "40": 5,
+            "42": 3,
+            "44": 2,
+            "46": 1
+        }
+    },
+    {
+        "id": 12,
+        "title": "Buty koszykarskie MB.02 Lo",
+        "description": "Buty koszykarskie MB.02 Lo to wysoko wydajne buty koszykarskie zaprojektowane dla nowoczesnych sportowców. Dzięki smukłemu, niskiemu kroju i zaawansowanej technologii amortyzacji, te buty zapewniają wyjątkowy komfort i wsparcie na boisku. Wytrzymała podeszwa z gumy gwarantuje doskonałą przyczepność, a lekka cholewka umożliwia maksymalną mobilność. Niezależnie od tego, czy jesteś doświadczonym zawodowcem, czy dopiero zaczynasz, buty koszykarskie MB.02 Lo są idealnym wyborem dla tych, którzy chcą grać w stylu LaMelo Ball.",
+        "price": 629.00,
+        "brand": "Puma",
+        "type": "buty",
+        "popularity_level": 4,
+        "image": "product12.png",
+        "shortName": "puma-melo-ball-two",
+        "sportsman": "LaMelo Ball",
+        "sizes": {
+            "36": 2,
+            "38": 4,
+            "40": 5,
+            "42": 3,
+            "44": 2,
+            "46": 1
+        }
+      },
+      {
+        "id": 12,
+        "title": "Buty koszykarskie MB.02 Lo",
+        "description": "Buty koszykarskie MB.02 Lo to wysoko wydajne buty koszykarskie zaprojektowane dla nowoczesnych sportowców. Dzięki smukłemu, niskiemu kroju i zaawansowanej technologii amortyzacji, te buty zapewniają wyjątkowy komfort i wsparcie na boisku. Wytrzymała podeszwa z gumy gwarantuje doskonałą przyczepność, a lekka cholewka umożliwia maksymalną mobilność. Niezależnie od tego, czy jesteś doświadczonym zawodowcem, czy dopiero zaczynasz, buty koszykarskie MB.02 Lo są idealnym wyborem dla tych, którzy chcą grać w stylu LaMelo Ball.",
+        "price": 629.00,
+        "brand": "Puma",
+        "type": "buty",
+        "popularity_level": 4,
+        "image": "product12.png",
+        "shortName": "puma-melo-ball-two",
+        "sportsman": "LaMelo Ball",
+        "sizes": {
+          "36": 2,
+          "38": 4,
+          "40": 5,
+          "42": 3,
+          "44": 2,
+          "46": 1
+        }
+      },
+      {
+        "id": 13,
+        "title": "Unisex Curry Flow 10 'Curry-fornia' Basketball Shoes",
+        "description": "Unisex Curry Flow 10 'Curry-fornia' Basketball Shoes are high-performance basketball shoes designed for the modern athlete. With a sleek, low-cut design and advanced cushioning technology, these shoes provide superior comfort and support on the court. The durable rubber outsole offers excellent traction, while the lightweight upper allows for maximum mobility. Whether you're a seasoned pro or just starting out, the Unisex Curry Flow 10 'Curry-fornia' Basketball Shoes are the perfect choice for those who want to play like Stephen Curry.",
+        "price": 740.00,
+        "brand": "Under Armour",
+        "type": "buty",
+        "popularity_level": 5,
+        "image": "product13.webp",
+        "newPrice": 699.99,
+        "shortName": "under-armour-curry-ten",
+        "sportsman": "Stephen Curry",
+        "sizes": {
+          "36": 1,
+          "38": 3,
+          "40": 4,
+          "42": 2,
+          "44": 2,
+          "46": 1
+        }
+      },
+      {
+        "id": 14,
+        "title": "Unisex Curry 4 Low FloTro 'Curry Camp' Basketball Shoes",
+        "description": "Unisex Curry 4 Low FloTro 'Curry Camp' Basketball Shoes are high-performance basketball shoes designed for the modern athlete. With a sleek, low-cut design and advanced cushioning technology, these shoes provide superior comfort and support on the court. The durable rubber outsole offers excellent traction, while the lightweight upper allows for maximum mobility. Whether you're a seasoned pro or just starting out, the Unisex Curry 4 Low FloTro 'Curry Camp' Basketball Shoes are the perfect choice for those who want to play like Stephen Curry.",
+        "price": 690.00,
+        "brand": "Under Armour",
+        "type": "buty",
+        "popularity_level": 3,
+        "image": "product14.webp",
+        "shortName": "under-armour-curry-four",
+        "sportsman": "Stephen Curry",
+        "sizes": {
+          "36": 2,
+          "38": 4,
+          "40": 4,
+          "42": 2,
+          "44": 2,
+          "46": 1
+        }
+      },
+      {
+        "id": 15,
+        "title": "HARDEN STEPBACK 3 SHOES",
+        "description": "HARDEN STEPBACK 3 SHOES are high-performance basketball shoes designed for the modern athlete. With a sleek, low-cut design and advanced cushioning technology, these shoes provide superior comfort and support on the court. The durable rubber outsole offers excellent traction, while the lightweight upper allows for maximum mobility. Whether you're a seasoned pro or just starting out, HARDEN STEPBACK 3 SHOES are the perfect choice for those who want to play like James Harden.",
+        "price": 239.40,
+        "brand": "Adidas",
+        "type": "buty",
+        "popularity_level": 2,
+        "image": "product15.avif",
+        "shortName": "adidas-harden-stepback",
+        "sportsman": "James Harden",
+        "sizes": {
+          "36": 2,
+          "38": 4,
+          "40": 5,
+          "42": 3,
+          "44": 2,
+          "46": 1
+        }
+      },
+      {
+        "id": 16,
+        "title": "BUTY HARDEN VOL. 7",
+        "description": "BUTY HARDEN VOL. 7 are high-performance basketball shoes designed for the modern athlete. With a sleek, low-cut design and advanced cushioning technology, these shoes provide superior comfort and support on the court. The durable rubber outsole offers excellent traction, while the lightweight upper allows for maximum mobility. Whether you're a seasoned pro or just starting out, BUTY HARDEN VOL. 7 are the perfect choice for those who want to play like James Harden.",
+        "price": 799.00,
+        "brand": "Adidas",
+        "type": "buty",
+        "popularity_level": 2,
+        "image": "product16.avif",
+        "shortName": "adidas-harden-vol-seven",
+        "sportsman": "James Harden",
+        "sizes": {
+          "36": 2,
+          "38": 4,
+          "40": 5,
+          "42": 3,
+          "44": 2,
+          "46": 1
+        }
+      },
+      {
+        "id": 17,
+        "title": "D.O.N. ISSUE #4 SHOES",
+        "description": "D.O.N. ISSUE #4 SHOES are high-performance basketball shoes designed for the modern athlete. With a sleek, low-cut design and advanced cushioning technology, these shoes provide superior comfort and support on the court. The durable rubber outsole offers excellent traction, while the lightweight upper allows for maximum mobility. Whether you're a seasoned pro or just starting out, D.O.N. ISSUE #4 SHOES are the perfect choice for those who want to play like Donovan Mitchell.",
+        "price": 499.00,
+        "brand": "Adidas",
+        "type": "buty",
+        "popularity_level": 3,
+        "image": "product17.avif",
+        "newPrice": 449.99,
+        "shortName": "adidas-mitchell-four",
+        "sportsman": "Donovan Mitchell",
+        "sizes": {
+          "36": 2,
+          "38": 4,
+          "40": 5,
+          "42": 3,
+          "44": 2,
+          "46": 1
+        }
+      },
+      {
+        "id": 18,
+        "title": "Buty Dame 8 Damian Lillard Adidas",
+        "description": "Buty Dame 8 Damian Lillard Adidas to wysoko wydajne buty koszykarskie zaprojektowane dla nowoczesnych sportowców. Dzięki smukłemu, niskiemu kroju i zaawansowanej technologii amortyzacji, te buty zapewniają wyjątkowy komfort i wsparcie na boisku. Wytrzymała podeszwa z gumy gwarantuje doskonałą przyczepność, a lekka cholewka umożliwia maksymalną mobilność. Niezależnie od tego, czy jesteś doświadczonym zawodowcem, czy dopiero zaczynasz, buty Dame 8 Damian Lillard Adidas są idealnym wyborem dla tych, którzy chcą grać w stylu Damiana Lillarda.",
+        "price": 249.99,
+        "brand": "Adidas",
+        "type": "buty",
+        "popularity_level": 1,
+        "image": "product18.webp",
+        "shortName": "adidas-lillard-8",
+        "sportsman": "Damian Lillard",
+        "sizes": {
+          "36": 2,
+          "38": 4,
+          "40": 5,
+          "42": 3,
+          "44": 2,
+          "46": 1
+        }
+      },
+      {
+        "id": 19,
+        "title": "Ja 1 „Fuel”",
+        "description": "Ja 1 „Fuel” to wysoko wydajne buty koszykarskie zaprojektowane dla nowoczesnych sportowców. Dzięki smukłemu, niskiemu kroju i zaawansowanej technologii amortyzacji, te buty zapewniają wyjątkowy komfort i wsparcie na boisku. Wytrzymała podeszwa z gumy gwarantuje doskonałą przyczepność, a lekka cholewka umożliwia maksymalną mobilność. Niezależnie od tego, czy jesteś doświadczonym zawodowcem, czy dopiero zaczynasz, Ja 1 „Fuel” są idealnym wyborem dla tych, którzy chcą grać w stylu Ja Moranta.",
+        "price": 549.99,
+        "brand": "Nike",
+        "type": "buty",
+        "popularity_level": 2,
+        "image": "product19.webp",
+        "shortName": "nike-ja-one-fuel",
+        "sportsman": "Ja Morant",
+        "sizes": {
+          "36": 2,
+          "38": 4,
+          "40": 5,
+          "42": 3,
+          "44": 2,
+          "46": 1
+        }
+      },
+      {
+        "id": 20,
+        "title": "Nike Lebron 9 Low",
+        "description": "The Nike Lebron 9 Low is a high-performance basketball shoe designed for the modern athlete. With a sleek, low-cut design and advanced cushioning technology, these shoes provide superior comfort and support on the court. The durable rubber outsole provides excellent traction, while the lightweight upper allows for maximum mobility. Whether you're a seasoned pro or just starting out, the Nike Lebron 9 Low is the perfect shoe for any basketball player looking to take their game to the next level.",
+        "price": 619.97,
+        "brand": "Nike",
+        "type": "buty",
+        "popularity_level": 5,
+        "image": "product20.webp",
+        "newPrice": 599.99,
+        "shortName": "nike-lebron-nine-low-liverpool",
+        "sizes": {
+          "36": 2,
+          "38": 4,
+          "40": 5,
+          "42": 3,
+          "44": 2,
+          "46": 1
+        }
+    }
+]
