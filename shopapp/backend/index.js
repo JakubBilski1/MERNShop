@@ -44,56 +44,34 @@ app.post('/products', async (req, res) => {
 
 app.post('/products/query', async (req, res) => {
   try {
-    const receivedBrands = req.body.brandsChecked;
-    const receivedSportsman = req.body.sportsmanChecked;
-    const receivedPrices = req.body.pricesData;
-    const errorMsg = { error: 'No products found' };
+    const { brandsChecked, sportsmanChecked, pricesData } = req.body;
     const db = client.db(dbName);
     const collection = db.collection(collectionName);
-    
-    let query = {};
 
-    if (receivedPrices.length === 0) {
-      query = {
-        $or: [
-          { brand: { $in: receivedBrands } },
-          { sportsman: { $in: receivedSportsman } },
-        ]
-      };
-    } else if(receivedBrands.length === 0 && receivedSportsman.length === 0 && receivedPrices.length != 0){
-      query = {
-        price: {
-          $gte: receivedPrices[0],
-          $lte: receivedPrices[1]
-        }
-      };
-    }else if (receivedPrices.length !== 0) {
-      query = {
-        $and: [
-          {
-            $or: [
-              { brand: { $in: receivedBrands } },
-              { sportsman: { $in: receivedSportsman } }
-            ]
-          },
-          { price: { $gte: receivedPrices[0], $lte: receivedPrices[1] } }
-        ]
-      };
-    }else if(receivedBrands.length === 0 && receivedSportsman.length != 0 && receivedPrices.length != 0){
-      query = {
-        $and: [
-          { sportsman: { $in: receivedSportsman } },
-          { price: { $gte: receivedPrices[0], $lte: receivedPrices[1] } }
-        ]
-      };
-    }else if(receivedBrands.length != 0 && receivedSportsman.length === 0 && receivedPrices.length != 0){
-      query = {
-        $and: [
-          { brand: { $in: receivedBrands } },
-          { price: { $gte: receivedPrices[0], $lte: receivedPrices[1] } }
-        ]
-      };
+    const queryConditions = [];
+
+    if (brandsChecked.length > 0) {
+      queryConditions.push({ brand: { $in: brandsChecked } });
     }
+
+    if (sportsmanChecked.length > 0) {
+      queryConditions.push({ sportsman: { $in: sportsmanChecked } });
+    }
+
+    if (pricesData.length > 0) {
+      queryConditions.push({
+        price: {
+          $gte: pricesData[0],
+          $lte: pricesData[1],
+        },
+      });
+    }
+
+    const query =
+      queryConditions.length > 0
+        ? { $and: queryConditions }
+        : {};
+
     queryEmitter.emit('queryChanged', query);
     const products = await collection.find(query).toArray();
     return res.json(products);
@@ -102,6 +80,7 @@ app.post('/products/query', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
 
 const router = express.Router();
 
@@ -143,27 +122,19 @@ router.post('/p/:shortName', async (req, res) => {
   }
 });
 
-async function getSizesForProduct(sizeIds, sizeCounts) {
-  const db = client.db(dbName);
-  const sizesCollection = db.collection(sizesCol);
-
-  const sizes = await sizesCollection.find({ id: { $in: sizeIds } }).toArray();
-
-  // Połącz rozmiary z ilościami
-  const sizesWithCounts = sizes.map((size, index) => ({
-    id: size.id,
-    name: size.name,
-    description: size.description,
-    count: sizeCounts[index]
-  }));
-
-  return sizesWithCounts;
-}
-
 app.use('/products', router);
 
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);
 });
 
-client.close();
+process.on('SIGINT', async () => {
+  try {
+    await client.close();
+    console.log('MongoDB connection closed');
+  } catch (error) {
+    console.error('Error closing MongoDB connection:', error);
+  } finally {
+    process.exit(0);
+  }
+});

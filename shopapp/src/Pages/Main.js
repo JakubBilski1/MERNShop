@@ -12,7 +12,7 @@ function Main(props) {
       .catch(err => console.log(err))
     }, [])
     return (
-      <main className="flex items-center justify-center flex-col bg-gray-800 p-[50px] gap-[20px]">
+      <div className="flex items-center justify-center flex-col bg-gray-800 p-[50px] gap-[20px]">
         {data ? <Link to={`/products/p/${data.shortName}`} className="bg-gray-700 text-white p-8 rounded-lg shadow-xl w-5/6 lg:w-2/3 xl:w-1/2">
           <div className="flex">
             <div className="w-1/3">
@@ -49,7 +49,7 @@ function Main(props) {
             })}
           </div>
         </div>
-      </main>
+      </div>
     ); 
 }
 

@@ -11,6 +11,8 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import ProductDetail from './Pages/ProductDetail';
 import { useParams } from 'react-router-dom';
+import Login from './Pages/Login';
+import Register from './Pages/Register';
 
 function App() {
   const [data, setData] = useState([])
@@ -19,19 +21,22 @@ function App() {
     .then(res => setData(res.data))
     .catch(err => console.log(err))
   }, [])
-  console.log(data)
   return (
     <Router>
-      <div className="App">
+      <div className="h-full flex flex-col">
         <Header />
-        <Routes>
-          <Route path="/" element={<Main data={data}/>} />
-          <Route path="/products" element={<Products data={data}/>} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path='*' element={<NotFoundPage />}/>
-          <Route path={`/products/p/:shortName`} element={<ProductDetailWrapper />}/>
-        </Routes>
+        <main className="h-full flex-grow">
+          <Routes>
+            <Route path="/" element={<Main data={data}/>} />
+            <Route path="/products" element={<Products data={data}/>} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path='*' element={<NotFoundPage />}/>
+            <Route path={`/products/p/:shortName`} element={<ProductDetailWrapper />}/>
+            <Route path={`/login`} element={<Login />}/>
+            <Route path={'/register'} element={<Register />}/>
+          </Routes>
+        </main>
         <Footer />
       </div>
     </Router>
