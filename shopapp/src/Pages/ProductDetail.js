@@ -26,6 +26,7 @@ function ProductDetail(props) {
             <p className="mb-2">{product.price}zł</p>
             <p className="mb-2 w-1/2">{product.description}</p>
             <p className="mb-2">Just {product.howMany} pieces left</p>
+            
           </div>
         </div>
       }

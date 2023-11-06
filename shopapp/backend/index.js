@@ -3,10 +3,12 @@ const EventEmitter = require('events');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const { get } = require('http');
 const app = express();
 const port = 5000;
 const uri = "mongodb+srv://root:TVcs49iXd3e9PVU5@atlascluster.jdiefog.mongodb.net/"
 const collectionName = "Products"
+const sizesCol = "Sizes"
 const dbName = "ShopperDB"
 const client = new MongoClient(uri, {
   serverApi: {
@@ -17,6 +19,7 @@ const client = new MongoClient(uri, {
 });
 
 client.connect()
+console.log("Connected successfully to db");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -123,17 +126,39 @@ router.post('/p/:shortName', async (req, res) => {
     const shortName = req.params.shortName;
     const query = { shortName: shortName };
     const product = await collection.findOne(query);
-    
+    const sizes = getSizesForProduct(product.sizeIds, product.sizeCounts);
+    const response = {
+      ...product,
+      sizes: await sizes
+    }
     if (!product) {
       res.status(404).json({ error: 'Product not found' });
     } else {
-      res.json(product);
+      res.json(response);
     }
+    console.log(response)
   } catch (error) {
     console.error('Error connecting to MongoDB:', error);
     res.status(500).send('Internal Server Error');
   }
 });
+
+async function getSizesForProduct(sizeIds, sizeCounts) {
+  const db = client.db(dbName);
+  const sizesCollection = db.collection(sizesCol);
+
+  const sizes = await sizesCollection.find({ id: { $in: sizeIds } }).toArray();
+
+  // Połącz rozmiary z ilościami
+  const sizesWithCounts = sizes.map((size, index) => ({
+    id: size.id,
+    name: size.name,
+    description: size.description,
+    count: sizeCounts[index]
+  }));
+
+  return sizesWithCounts;
+}
 
 app.use('/products', router);
 
