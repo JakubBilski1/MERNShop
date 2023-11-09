@@ -23,9 +23,9 @@ function App() {
   }, [])
   return (
     <Router>
-      <div className="h-full flex flex-col">
+      <div className="App">
         <Header />
-        <main className="h-full flex-grow">
+        <main className="main">
           <Routes>
             <Route path="/" element={<Main data={data}/>} />
             <Route path="/products" element={<Products data={data}/>} />
