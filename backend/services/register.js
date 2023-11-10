@@ -1,6 +1,5 @@
 const argon2 = require('argon2');
 const dbConnect = require('./dbConnect');
-const { redirect } = require('react-router');
 
 const register = async (req, res) => {
     const db = await dbConnect();

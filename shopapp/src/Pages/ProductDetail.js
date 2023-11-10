@@ -25,7 +25,7 @@ function ProductDetail(props) {
       {product &&
         <div className="flex">
           <div className="w-1/2">
-            <img src={`https://gymbrothers.pl/productImages/${product.image}`} alt={product.title} />
+            <img src={`/Images/${product.image}`} alt={product.title} />
           </div>
           <div className="ml-4">
             <h2 className="text-2xl font-bold mb-2">{product.title}</h2>

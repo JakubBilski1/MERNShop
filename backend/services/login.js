@@ -1,5 +1,6 @@
 const argon2 = require('argon2');
 const dbConnect = require('./dbConnect');
+const jwt = require('jsonwebtoken');
 
 const login = async (req, res) => {
     const db = await dbConnect()
@@ -16,10 +17,16 @@ const login = async (req, res) => {
       } else {
         const userData = {
           id: user._id,
-          email,
-          nick: user.nick
+          email
         }
-        return res.json({ userData });
+        const token = jwt.sign(userData, process.env.JWT_SECRET, { expiresIn: '1d' })
+        res.cookie('token', token, {
+          httpOnly: true,
+          maxAge: 1000 * 60 * 60 * 24,
+          sameSite: "lax",
+          path: "/"
+        })
+        return res.json({ message: 'Logged in' });
       }
     }
 }

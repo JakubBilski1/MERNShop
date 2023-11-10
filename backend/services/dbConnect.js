@@ -1,7 +1,7 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
 // Adres URL bazy danych MongoDB i opcje połączenia
-const uri = 'mongodb+srv://root:TVcs49iXd3e9PVU5@atlascluster.jdiefog.mongodb.net/'; // Zmień na odpowiedni adres URL
+const uri = process.env.DATABASE_URI; // Zmień na odpowiedni adres URL
 const dbName = "ShopperDB"
 let _db;
 

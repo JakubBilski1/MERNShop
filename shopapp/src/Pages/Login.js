@@ -10,15 +10,17 @@ export default function Login() {
   const handleChange = (e) => {
     setData({...data, [e.target.name]: e.target.value})
   }
+  const login = async (credentials) => {
+    try {
+      const response = await axios.post('http://localhost:5000/auth/login', credentials, {withCredentials: true});
+      console.log(response)
+    } catch (error) {
+      console.error('Błąd logowania:', error);
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post('http://localhost:5000/auth/login', {data})
-      .then((response) => {
-        console.log(response)
-        setInfo(`Zostales pomyslne zalogowany, Witaj ${response.data.userData.nick}`)
-      }, (error) => {
-        console.log(error)
-      })
+    login({data})
   }
   return (
     <div className="flex items-center justify-center p-[10vh]" style={{ background: 'linear-gradient(135deg, #3498db, #c0392b)'}}>

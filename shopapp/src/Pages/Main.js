@@ -17,7 +17,7 @@ function Main(props) {
           <div className="flex">
             <div className="w-1/3">
               <img
-                src={`https://gymbrothers.pl/productImages/${data.image}`}
+                src={`/Images/${data.image}`}
                 alt={data.title}
                 className="w-full rounded-lg"
               />
@@ -37,7 +37,7 @@ function Main(props) {
               return (
                 <Link to={`/products/p/${item.shortName}`} key={item.id} className="flex flex-col w-[250px] h-[450px]">
                   <div>
-                    <img src={`https://gymbrothers.pl/productImages/${item.image}`} alt={item.title} className="w-[250px] h-[300px]" />
+                    <img src={`/Images/${item.image}`} alt={item.title} className="w-[250px] h-[300px]" />
                   </div>
                   <div className="bg-gray-700 flex flex-col h-[100%] rounded-b-2xl p-[10px]">
                     <h2 className="text-2xl text-white">{item.title}</h2>
