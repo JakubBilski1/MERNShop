@@ -13,7 +13,10 @@ export default function Login() {
   const login = async (credentials) => {
     try {
       const response = await axios.post('http://localhost:5000/auth/login', credentials, {withCredentials: true});
-      console.log(response)
+      if(response){
+        const redirectTo = response.data.redirectTo;
+        window.location.href = redirectTo;
+      }
     } catch (error) {
       console.error('Błąd logowania:', error);
     }
