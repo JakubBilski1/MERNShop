@@ -26,7 +26,7 @@ const login = async (req, res) => {
           sameSite: "lax",
           path: "/"
         })
-        return res.json({ message: 'Logged in' });
+        return res.json({ message: 'Logged in', redirectTo: '/u/dashboard' });
       }
     }
 }

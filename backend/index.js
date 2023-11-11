@@ -4,10 +4,10 @@ const cors = require('cors');
 const app = express();
 const port = 5000;
 require('dotenv').config(); 
+const cookieParser = require('cookie-parser');
 const AuthRoute = require('./routes/authRoute')
 const ProductRoute = require('./routes/productRoute');
 const UserRoute = require('./routes/userRoute');
-const cookieParser = require('cookie-parser');
 const corsOptions = {
   origin: "http://localhost:3000",
   credentials: true,
