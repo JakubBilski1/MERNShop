@@ -11,7 +11,7 @@ const register = async (req, res) => {
     if (user) {
       res.status(409).json({ error: 'User already exists' });
     } else {
-      const result = await collection.insertOne({ email, password, nick });
+      const result = await collection.insertOne({ email, password, nick, settings: {darkTheme: true, country: '', city: '', phoneNumber: '', birthDate: ''}, profileImage: '', cart: [], orders: [], role: 'user', createdAt: new Date(), favTeams: [] });
       console.log(result);
       const userData = {
         id: result.insertedId,

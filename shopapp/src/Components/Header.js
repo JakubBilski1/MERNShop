@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-function Header() {
+function Header(props) {
     return (
         <header className="flex justify-between items-center p-[20px] sticky top-0 w-[100%]" style={{background: 'rgb(41, 41, 41)'}}>
             <Link to={'/'}><img src={logo} alt="logo" className="w-[150px]" /></Link>
@@ -15,7 +15,8 @@ function Header() {
                 <Link to={'/products'} className="hover:text-gray-500 transition duration-300 linear">Products</Link>
                 <Link to={'/contact'} className="hover:text-gray-500 transition duration-300 linear">Contact</Link>
                 <a href="/" className="hover:text-gray-500 transition duration-300 linear">Cart</a>
-                <Link to={'/login'}><FontAwesomeIcon icon={faUser} /></Link>
+                {props.data.length!==0 && <p>Witaj, Kuba</p>}
+                <Link to={props.data.length!==0 ? '/u/dashboard' : '/login'}><FontAwesomeIcon icon={faUser} /></Link>
             </div>
         </header>
     )

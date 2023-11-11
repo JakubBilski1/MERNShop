@@ -23,8 +23,6 @@ const login = async (req, res) => {
         res.cookie('token', token, {
           httpOnly: true,
           maxAge: 1000 * 60 * 60 * 24,
-          sameSite: "lax",
-          path: "/"
         })
         return res.json({ message: 'Logged in', redirectTo: '/u/dashboard' });
       }

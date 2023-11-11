@@ -5,8 +5,8 @@ import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
 export default function Login() {
-  const [info, setInfo] = useState('');
   const [data, setData] = useState({email: '', password: ''})
+  const [loading, setLoading] = useState(false);
   const handleChange = (e) => {
     setData({...data, [e.target.name]: e.target.value})
   }
@@ -19,10 +19,13 @@ export default function Login() {
       }
     } catch (error) {
       console.error('Błąd logowania:', error);
+    }finally{
+      setLoading(false)
     }
   };
   const handleSubmit = (e) => {
     e.preventDefault()
+    setLoading(true)
     login({data})
   }
   return (
@@ -60,16 +63,15 @@ export default function Login() {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-400 text-white py-2 rounded hover:bg-blue-500 transition duration-300"
-            onClick={e=>handleSubmit(e)}
+            className={`w-full bg-blue-400 text-white py-2 rounded hover:bg-blue-500 transition duration-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            onClick={(e) => handleSubmit(e)}
           >
-            Log In
+            {loading ? 'Loading...' : 'Log In'}
           </button>
         </form>
         <p className="mt-4 text-sm text-gray-400 text-center">
           Don't have an account? <Link to="/register" className="text-blue-400 font-semibold hover:underline">Register</Link>
         </p>
-        <p>{info}</p>
       </div>
     </div>
   );

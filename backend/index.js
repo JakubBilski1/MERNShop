@@ -1,28 +1,34 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
 const app = express();
-const port = 5000;
-require('dotenv').config(); 
+const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const AuthRoute = require('./routes/authRoute')
+const cors = require('cors');
+const dotenv = require('dotenv');
+dotenv.config();
+app.use(cookieParser());
+
+const AuthRoute = require('./routes/authRoute');
 const ProductRoute = require('./routes/productRoute');
 const UserRoute = require('./routes/userRoute');
-const corsOptions = {
+const DataRoute = require('./routes/dataRoute');
+
+const port = 5000;
+
+let corsOptions = {
   origin: "http://localhost:3000",
   credentials: true,
   optionsSuccessStatus: 200,
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 };
 
-app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
+app.use(cors(corsOptions));
 
-app.use("/auth", AuthRoute )
+app.use("/auth", AuthRoute);
 app.use('/products', ProductRoute);
-app.use('/u/', UserRoute)
+app.use('/u', UserRoute);
+app.use('/d/', DataRoute)
 
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);

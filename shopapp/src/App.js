@@ -17,15 +17,20 @@ import Dashboard from './Pages/Dashboard';
 
 function App() {
   const [data, setData] = useState([])
+  const [users, setUsers] = useState([])
   useEffect(() => {
     axios.post('http://localhost:5000/products')
     .then(res => setData(res.data))
+    .catch(err => console.log(err))
+
+    axios.post('http://localhost:5000/u/dashboard', {}, { withCredentials: true })
+    .then(res => setUsers(res.data))
     .catch(err => console.log(err))
   }, [])
   return (
     <Router>
       <div className="App">
-        <Header />
+        <Header data={users}/>
         <main className="main">
           <Routes>
             <Route path="/" element={<Main data={data}/>} />
