@@ -9,9 +9,8 @@ function DashboardTeams() {
   const [showNBATeams, setShowNBATeams] = useState(false);
   const [showPLTeams, setShowPLTeams] = useState(false);
   const [data, setData] = useState([]);
-  const [selectedTeams, setSelectedTeams] = useState([]);
+  const [selectedTeams, setSelectedTeams] = useState({});
   const [teamsfromDB, setTeamsfromDB] = useState([]);
-  const [allSelectedTeams, setAllSelectedTeams] = useState([]);
 
   const togglePopup = () => {
     setPopupVisible(!isPopupVisible);
@@ -39,59 +38,65 @@ function DashboardTeams() {
   }, []);
 
   const handleChange = (e) => {
-    const { value } = e.target;
-  
-    if (e.target.checked) {
-      setSelectedTeams((prevTeams) => [...prevTeams, value]);
-    } else {
-      // Remove the unselected team from the selectedTeams state
-      setSelectedTeams((prevTeams) => prevTeams.filter((team) => team !== value));
-      
-      // Remove the unselected team from the allSelectedTeams state
-      setAllSelectedTeams((prevAllSelectedTeams) => prevAllSelectedTeams.filter((team) => team !== value));
-    }
-  };
-  
+    const image = e.target.value;
+    const team = e.target.name;
+    e.target.checked ? setSelectedTeams(prevState => ({...prevState, [team]: image})) : setSelectedTeams(prevState => ({...prevState, [team]: null}));
+  }
 
   const handleClick = (e) => {
     e.preventDefault();
-  
-    const nbaSelectedTeams = data
-      .filter((team) => selectedTeams.includes(team.team_name))
-      .map((team) => team.team_name);
-  
-    const plSelectedTeams = plTeams
-      .filter((team) => selectedTeams.includes(team.name))
-      .map((team) => team.name);
-  
-    const dbSelectedTeams = teamsfromDB;
-  
-    const newAllSelectedTeams = [...nbaSelectedTeams, ...plSelectedTeams, ...dbSelectedTeams];
-    setAllSelectedTeams(newAllSelectedTeams);
-    console.log(newAllSelectedTeams);
-  
-    /*axios
-      .post('http://localhost:5000/u/updateData', { selectedTeams: newAllSelectedTeams }, { withCredentials: true })
+    console.log(selectedTeams)
+    axios
+      .post('http://localhost:5000/u/updateData', { selectedTeams: selectedTeams }, { withCredentials: true })
       .then((res) => {
-        // Handle the response if needed
         console.log(res.data);
       })
-      .catch((err) => console.error(err));*/
+      .catch((err) => console.error(err));
+      setPopupVisible(false);
   };
   
 
   const checkIfChecked = (team) => {
-    return teamsfromDB.includes(team);
+    if(teamsfromDB){
+      if(teamsfromDB[team]){
+        return true;
+      }
+    }
+    return false;
   };
 
   return (
-    <div className="bg-gray-800 p-8 rounded shadow-lg w-96 relative">
+    <div className="bg-gray-800 p-8 rounded shadow-lg w-96 relative flex justify-around">
       <button
         className="bg-gray-600 rounded-full p-4 text-white focus:outline-none"
         onClick={togglePopup}
       >
         <FontAwesomeIcon icon={faPlus} className="text-2xl" />
       </button>
+      <div>
+        {teamsfromDB ? (
+          <div>
+            <div className="flex gap-2">
+              {Object.entries(teamsfromDB).map(([key, value]) => {
+                return (
+                  value!==null &&
+                  (<div key={key} className="flex items-center gap-2">
+                  <img
+                    src={value}
+                    alt={key}
+                    className="w-12 h-12 object-cover"
+                  />
+                </div>)
+                );
+              })}
+            </div>
+          </div>
+        ) : (
+          <p className="text-white text-lg font-bold mt-4">
+            Nie wybrałeś jeszcze ulubionych drużyn
+          </p>
+        )}
+      </div>
 
       {isPopupVisible && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
@@ -130,9 +135,9 @@ function DashboardTeams() {
                             type="checkbox"
                             name={team.team_name}
                             id=""
-                            value={team.team_name}
+                            value={team.image}
                             defaultChecked={checkIfChecked(team.team_name)}
-                            onChange={handleChange}
+                            onChange={e=>handleChange(e)}
                           />
                           <p className="text-white">{team.team_name}</p>
                         </div>
@@ -162,9 +167,9 @@ function DashboardTeams() {
                             type="checkbox"
                             name={team.name}
                             id=""
-                            value={team.name}
+                            value={team.image}
                             defaultChecked={checkIfChecked(team.name)}
-                            onChange={handleChange}
+                            onChange={e=>handleChange(e)}
                           />
                           <p className="text-white">{team.name}</p>
                         </div>

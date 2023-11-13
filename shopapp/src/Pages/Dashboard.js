@@ -85,7 +85,7 @@ function Dashboard() {
             </label>
           </form>
           <div>
-            {selectedOption === 'user' || selectedOption === 'admin' && <UserPanel userData={userData}/>}
+            {(selectedOption === 'user' || selectedOption === 'admin') && <UserPanel userData={userData}/>}
             {selectedOption === 'basket' && <DashboardCart />}
             {selectedOption === 'orders' && <DashboardOrders />}
             {selectedOption === 'favorites' && <DashboardTeams />}

@@ -21,7 +21,7 @@ const updateAddData = async (req, res) => {
     }else{
         favTeams = find.favTeams;
     }
-    const update = { $set: { cart: cart, orders: orders, favTeams: favTeams } };
+    const update = req.body.selectedTeams ? { $set: { favTeams: favTeams } } : { $push: { cart: cart } };
     const result = await collection.updateOne(query, update);
     res.json(result);
 }
