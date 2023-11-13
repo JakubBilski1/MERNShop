@@ -7,6 +7,7 @@ function ProductDetail(props) {
   const [cart, setCart] = useState({});
   const [sizeCart, setSizeCart] = useState('');
   const [info, setInfo] = useState();
+  const [error, setError] = useState('');
   
   useEffect(() => {
     const shortName = props.shortName;
@@ -25,9 +26,16 @@ function ProductDetail(props) {
 
   useEffect(() => {
     if(cart.id && cart.size){
-      axios.post('http://localhost:5000/u/updateData', {cart: cart}, {withCredentials: true})
-      .then(res => setInfo(res.data))
-      .catch(err => console.log(err))
+      if(props.cart.products.length > 0 && props.cart.products.find(item => item.id == cart.id && item.size == cart.size)){
+        setError('This item is already in your cart');
+        return;
+      }else{
+        axios.post('http://localhost:5000/u/updateData', {cart: cart}, {withCredentials: true})
+        .then(res => setInfo(res.data))
+        .catch(err => console.log(err))
+        setError('');
+        window.location.reload();
+      }
     }
     if(info){
       alert("dodano do koszyka")
@@ -39,7 +47,7 @@ function ProductDetail(props) {
   }
 
   const addToCart = () => {
-    setCart(prevState => ({...prevState, "id": product.id, "size": sizeCart}))
+    setCart(prevState => ({...prevState, cartProductId: `${product.id}_${sizeCart}`,"_id": product._id, "id": product.id, "size": sizeCart, "quantity": 1, "fullPrice": product.price}))
   }
 
   return (
@@ -76,6 +84,7 @@ function ProductDetail(props) {
                 )
               })}
             </div>
+            <p className="text-red-500">{error}</p>
             <p>Currently in stock: {count}</p>
           </div>
         </div>

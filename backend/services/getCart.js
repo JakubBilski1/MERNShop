@@ -1,4 +1,9 @@
 const dbConnect = require('./dbConnect');
+const { ObjectId } = require('mongodb');
+
+const roundToTwoDecimals = (number) => {
+    return Math.round(number * 100) / 100;
+};
 
 const getCart = async(req, res)=>{
     const db = await dbConnect();
@@ -6,12 +11,20 @@ const getCart = async(req, res)=>{
     const collectionProducts = db.collection('Products');
     const query = { email: req.userData.email };
     const userData = await collectionUsers.findOne(query);
-    const productsQuery = { id: { $in: userData.cart.map(element => element.id) } };
-    const products = await collectionProducts.find(productsQuery).toArray();
-    products.forEach(product => {
-        product.size = userData.cart.find(element => element.id === product.id).size;
-    });
-    res.json(products)
+    const userCart = userData.cart;
+    const products = [];
+    let totalPrice = 0;
+    for(let i = 0; i < userCart.length; i++){
+        const product = await collectionProducts.findOne({id: userCart[i].id});
+        product.size = userCart[i].size;
+        product.quantity = userCart[i].quantity;
+        product.fullPrice = roundToTwoDecimals(product.price*product.quantity);
+        product.maxQuantity = product.sizes[product.size];
+        totalPrice += product.fullPrice;
+        products.push(product);
+    }
+    formattedTotalPrice = roundToTwoDecimals(totalPrice);
+    res.json({products, formattedTotalPrice})
 }
 
 module.exports = getCart;

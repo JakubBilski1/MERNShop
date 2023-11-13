@@ -19,6 +19,7 @@ import Cart from './Pages/Cart';
 function App() {
   const [data, setData] = useState([])
   const [users, setUsers] = useState([])
+  const [cart, setCart] = useState([])
   useEffect(() => {
     axios.post('http://localhost:5000/products')
     .then(res => setData(res.data))
@@ -27,11 +28,21 @@ function App() {
     axios.post('http://localhost:5000/u/dashboard', {}, { withCredentials: true })
     .then(res => setUsers(res.data))
     .catch(err => console.log(err))
+
+    axios
+      .post('http://localhost:5000/u/cart', {}, { withCredentials: true })
+      .then((res) => setCart(res.data))
+      .catch((err) => console.log(err));
   }, [])
+
+  function ProductDetailWrapper(){
+    const { shortName } = useParams();
+    return <ProductDetail shortName={shortName} cart={cart}/>
+  }
   return (
     <Router>
       <div className="App">
-        <Header data={users}/>
+        <Header data={users} cart={cart}/>
         <main className="main">
           <Routes>
             <Route path="/" element={<Main data={data}/>} />
@@ -43,18 +54,13 @@ function App() {
             <Route path={`/login`} element={<Login />}/>
             <Route path={'/register'} element={<Register />}/>
             <Route path={'/u/dashboard'} element={<Dashboard />}/>
-            <Route path={'/cart'} element={<Cart />}/>
+            <Route path={'/cart'} element={<Cart cart={cart}/>}/>
           </Routes>
         </main>
         <Footer />
       </div>
     </Router>
   );
-}
-
-function ProductDetailWrapper(){
-  const { shortName } = useParams();
-  return <ProductDetail shortName={shortName} />
 }
 
 export default App;

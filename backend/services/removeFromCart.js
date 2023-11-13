@@ -7,7 +7,7 @@ const removeFromCart = async (req, res) => {
     const query = { email: req.userData.email };
     const markedForDeletion = req.body.markedForDeletion;
 
-    const result = await collection.updateOne(query, { $pull: { cart: { id: markedForDeletion } } });
+    const result = await collection.updateOne(query, { $pull: { cart: { cartProductId: markedForDeletion } } });
 
     res.json(result);
 }
