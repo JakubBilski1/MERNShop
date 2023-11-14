@@ -1,13 +1,12 @@
 import './index.css';
-import Header from './Components/Header';
-import Footer from './Components/Footer';
+import Header from './Components/Structure/Header/Header';
+import Footer from './Components/Structure/Footer';
 import Main from './Pages/Main';
 import Products from './Pages/Products';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import About from './Pages/About';
 import Contact from './Pages/Contact';
 import NotFoundPage from './Pages/NotFoundPage';
-import axios from 'axios'
 import { useState, useEffect } from 'react'
 import ProductDetail from './Pages/ProductDetail';
 import { useParams } from 'react-router-dom';
@@ -15,38 +14,44 @@ import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Dashboard from './Pages/Dashboard';
 import Cart from './Pages/Cart';
+import { getCart } from './Services/CartService';
+import { getProducts } from './Services/ProductsService';
+import { getUser } from './Services/UserDataService';
 
 function App() {
   const [data, setData] = useState([])
-  const [users, setUsers] = useState([])
+  const [user, setUser] = useState([])
   const [cart, setCart] = useState([])
   useEffect(() => {
-    axios.post('http://localhost:5000/products')
-    .then(res => setData(res.data))
-    .catch(err => console.log(err))
+    const fetchData = async () => {
+      try{
+        const productsResponse = await getProducts()
+        setData(productsResponse)
 
-    axios.post('http://localhost:5000/u/dashboard', {}, { withCredentials: true })
-    .then(res => setUsers(res.data))
-    .catch(err => console.log(err))
+        const userResponse = await getUser()
+        setUser(userResponse)
 
-    axios
-      .post('http://localhost:5000/u/cart', {}, { withCredentials: true })
-      .then((res) => setCart(res.data))
-      .catch((err) => console.log(err));
+        const responseCart = await getCart()
+        setCart(responseCart)
+      }catch(err){
+        console.log(err)
+      }
+    }
+    fetchData()
   }, [])
-
   function ProductDetailWrapper(){
     const { shortName } = useParams();
     return <ProductDetail shortName={shortName} cart={cart}/>
   }
+
   return (
     <Router>
       <div className="App">
-        <Header data={users} cart={cart}/>
+        <Header data={user ? user : []} cart={cart ? cart: []}/>
         <main className="main">
           <Routes>
-            <Route path="/" element={<Main data={data}/>} />
-            <Route path="/products" element={<Products data={data}/>} />
+            <Route path="/" element={data.length>0 ? <Main data={data}/> : <p>Loading...</p>} />
+            <Route path="/products" element={data.length>0 ? <Products data={data}/> : <p>Loading...</p>} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path='*' element={<NotFoundPage />}/>

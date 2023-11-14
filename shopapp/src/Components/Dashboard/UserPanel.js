@@ -1,18 +1,12 @@
 import Settings from './Settings'
 import { useState } from 'react';
-import axios from 'axios';
+import { logout } from '../../Services/UserDataService';
 
 function UserPanel(props) {
-    const [showSettings, setShowSettings] = useState(false);
-    const logout = () => {
-        axios.post('http://localhost:5000/u/logout', {}, { withCredentials: true })
-          .then((res) => (window.location.href = res.data.redirectTo))
-          .catch((err) => console.log(err));
-    };
-
-    const toggleSettings = () => {
-        setShowSettings(!showSettings);
-      };
+  const [showSettings, setShowSettings] = useState(false);
+  const toggleSettings = () => {
+    setShowSettings(!showSettings);
+  };
   return (
     <div className="bg-gray-800 p-8 rounded shadow-lg w-96">
         <div className="mb-4">

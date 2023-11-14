@@ -1,18 +1,16 @@
-const { body } = require('express-validator');
+const { validationResult } = require('express-validator');
 
-const registerValidation = [
-    body('nick').isString().notEmpty().trim().escape(),
-    body('email').isEmail(),
-    body('password')
-        .isLength({ min: 8 })
-        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/),
-    body('passwordConfirm').custom((value, { req }) => {
-        if (value !== req.body.password) {
-            throw new Error('Password confirmation does not match password');
-        }
-        console.log('koniec');
-        return true;
-    }),
-];
+const registerValidation = (req, res, next) => {
+    const errors = validationResult(req);
+    console.log(errors);
+
+    if (!errors.isEmpty()) {
+        const errorMessages = errors.array().map(e => e.msg);
+
+        return res.status(400).json({ errorMessages });
+    }
+
+    next();
+}
 
 module.exports = registerValidation;

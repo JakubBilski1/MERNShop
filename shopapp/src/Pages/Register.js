@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
+import { registerValidation, register } from '../Services/RegisterService';
 
 export default function Register() {
     const [data, setData] = useState({
@@ -24,48 +24,19 @@ export default function Register() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
-        if (!emailPattern.test(data.email)) {
-            setError('Enter a valid email address.');
-            return;
-        }
-
-        if (data.password !== data.passwordConfirm) {
-            setError('Password and password confirmation do not match.');
-            return;
-        }
-
-        for (const key in data) {
-            if (data[key] === '') {
-                setError('All fields are required.');
-                return;
+        const validate = registerValidation(data);
+        if(validate === ''){
+            setError('');
+            try {
+                setLoading(true);
+                await register({ data });
+            } catch (error) {
+                console.error('Error:', error);
+            } finally {
+                setLoading(false);
             }
-        }
-
-        const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-
-        if (!passwordPattern.test(data.password)) {
-            setError('Password must be at least 8 characters long and include a digit, a lowercase letter, and an uppercase letter.');
-            return;
-        }
-
-        setError('');
-        setLoading(true);
-
-        try {
-            const response = await axios.post('/auth/register', { data });
-
-            const { userData, redirectTo } = response.data;
-
-            console.log(userData);
-
-            window.location.href = redirectTo;
-        } catch (error) {
-            console.error('Error:', error);
-        } finally {
-            setLoading(false);
+        }else{
+            setError(validate);
         }
     };
 

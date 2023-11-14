@@ -1,5 +1,6 @@
-import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { getClickedProduct } from '../Services/ProductsService';
+import { updateCartData } from '../Services/CartService';
 
 function ProductDetail(props) {
   const [product, setProduct] = useState();
@@ -11,36 +12,42 @@ function ProductDetail(props) {
   
   useEffect(() => {
     const shortName = props.shortName;
-    axios
-      .post(`http://localhost:5000/products/p/${shortName}`)
-      .then((res) => {
-        setProduct(res.data);
+    const fetchProduct = async () => {
+      try{
+        const response = await getClickedProduct(shortName);
+        setProduct(response);
         let totalCount = 0;
-        Object.values(res.data.sizes).forEach((sizeCount) => {
+        Object.values(response.sizes).forEach((sizeCount) => {
           totalCount += sizeCount;
         });
         setCount(totalCount);
-      })
-      .catch((err) => console.log(err));
+      }catch(err){
+        console.log(err)
+      }
+    }
+    fetchProduct();
   }, [props.shortName]);
 
   useEffect(() => {
-    if(cart.id && cart.size){
-      if(props.cart.products.length > 0 && props.cart.products.find(item => item.id == cart.id && item.size == cart.size)){
-        setError('This item is already in your cart');
-        return;
-      }else{
-        axios.post('http://localhost:5000/u/updateData', {cart: cart}, {withCredentials: true})
-        .then(res => setInfo(res.data))
-        .catch(err => console.log(err))
-        setError('');
-        window.location.reload();
+      const fetchCart = async () => {
+        try{
+          const response = await updateCartData(cart);
+          setInfo(response);
+          setError('');
+          window.location.reload();
+        }catch(err){
+          console.log(err)
+        }
       }
-    }
-    if(info){
-      alert("dodano do koszyka")
-    }
-  }, [cart])
+      if(cart.id && cart.size){
+        if(props.cart.products.length > 0 && props.cart.products.find(item => item.id == cart.id && item.size == cart.size)){
+          setError('This item is already in your cart');
+          return;
+        }else{
+          fetchCart();
+        }
+      }
+  }, [cart]);
 
   const handleSize = (e) => {
     setSizeCart(e.target.value);

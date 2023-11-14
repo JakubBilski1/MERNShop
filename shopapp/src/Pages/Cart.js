@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { deleteFromCart, updateCart } from '../Services/CartService';
 
 function Cart(props) {  
   const [quantity, setQuantity] = useState(1);
@@ -8,19 +9,15 @@ function Cart(props) {
   const [price, setPrice] = useState(0);
 
   const deleteProduct = (id, size) => {
-    axios
-      .post('http://localhost:5000/u/cart/delete', {markedForDeletion: `${id}_${size}`}, { withCredentials: true })
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
+    const res = deleteFromCart(id, size);
+    console.log(res);
     window.location.reload();
   }
-
+  
   useEffect(() => {
     if(quantityProductId !== 0){
-      axios
-      .post('http://localhost:5000/u/cart/update', {id: quantityProductId, quantity: quantity, fullPrice: price}, { withCredentials: true })
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
+      const res = updateCart(quantityProductId, quantity, price);
+      console.log(res)
       window.location.reload();
     }}, [quantity])
 
@@ -29,7 +26,6 @@ function Cart(props) {
     setQuantityProductId(e.target.value.split(',')[2]);
     setPrice(e.target.value.split(',')[1]);
   }
-  console.log(props.cart.products)
   return (
     <div className="flex items-center justify-center bg-gray-800 text-white">
       <div className="container mx-auto p-4 flex flex-col gap-[10px]">

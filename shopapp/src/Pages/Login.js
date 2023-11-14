@@ -2,31 +2,28 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
+import { login } from '../Services/LoginService';
 
 export default function Login() {
   const [data, setData] = useState({email: '', password: ''})
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
   const handleChange = (e) => {
     setData({...data, [e.target.name]: e.target.value})
   }
-  const login = async (credentials) => {
-    try {
-      const response = await axios.post('http://localhost:5000/auth/login', credentials, {withCredentials: true});
-      if(response){
-        const redirectTo = response.data.redirectTo;
-        window.location.href = redirectTo;
+  const handleSubmit = async(e) => {
+    e.preventDefault()
+    setLoading(true)
+    try{
+      const response = await login({data})
+      if(response === 404){
+        setError('Niepoprawny email lub hasło')
       }
-    } catch (error) {
-      console.error('Błąd logowania:', error);
+    }catch(error){
+      console.error('Error:', error)
     }finally{
       setLoading(false)
     }
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setLoading(true)
-    login({data})
   }
   return (
     <div className="flex items-center justify-center p-[10vh]" style={{ background: 'linear-gradient(135deg, #3498db, #c0392b)'}}>
@@ -61,6 +58,7 @@ export default function Login() {
               />
             </div>
           </div>
+          {error && <p className="text-red-500 mb-4">{error}</p>}
           <button
             type="submit"
             className={`w-full bg-blue-400 text-white py-2 rounded hover:bg-blue-500 transition duration-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}

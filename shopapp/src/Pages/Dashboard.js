@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import UserPanel from '../Components/UserPanel';
-import DashboardCart from '../Components/DashboardCart';
-import DashboardOrders from '../Components/DashboardOrders';
-import DashboardTeams from '../Components/DashboardTeams';
+import UserPanel from '../Components/Dashboard/UserPanel';
+import DashboardCart from '../Components/Dashboard/DashboardCart';
+import DashboardOrders from '../Components/Dashboard/DashboardOrders';
+import DashboardTeams from '../Components/Dashboard/DashboardTeams';
+import { getUser } from '../Services/UserDataService';
 
 function Dashboard() {
   const [userData, setUserData] = useState({});
-  const [selectedOption, setSelectedOption] = useState(userData.role === 'admin' ? 'admin' : 'user');
+  const [selectedOption, setSelectedOption] = useState(userData && (userData.role === 'admin' ? 'admin' : 'user'));
 
   useEffect(() => {
-    axios.post('http://localhost:5000/u/dashboard', {}, { withCredentials: true })
-      .then((res) => setUserData(res.data))
-      .catch((err) => {
-        if (err.response.status === 401) {
-          console.log('Błąd uwierzytelnienia (401)');
-          window.location.href = '/login';
-        } else {
-          console.log('Inny błąd:', err);
-        }
-      });
+    const fetchUser = async () => {
+      await getUser()
+        .then((response) => {
+          setUserData(response);
+        })
+        .catch((error) => {
+          if (error.response.status === 401) {
+            window.location.href = '/login';
+          }else if(error){
+            console.log(error);
+          }
+        });
+    }
+    fetchUser();
   }, []);
 
   return (
