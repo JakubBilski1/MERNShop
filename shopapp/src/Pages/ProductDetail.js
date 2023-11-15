@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react';
 import { getClickedProduct } from '../Services/ProductsService';
-import { updateCartData } from '../Services/CartService';
+import Popup from '../Components/Products/Detail/Popup';
+import { getSocket } from '../Services/getSocket';
 
 function ProductDetail(props) {
   const [product, setProduct] = useState();
   const [count, setCount] = useState(0);
-  const [cart, setCart] = useState({});
   const [sizeCart, setSizeCart] = useState('');
-  const [info, setInfo] = useState();
-  const [error, setError] = useState('');
-  
+  const [popupInfo, setPopupInfo] = useState(null);
+  const [popupColor, setPopupColor] = useState('');
+  const socket = getSocket();
+
   useEffect(() => {
-    const shortName = props.shortName;
+    const shortName = props.shortName
     const fetchProduct = async () => {
       try{
         const response = await getClickedProduct(shortName);
@@ -25,36 +26,48 @@ function ProductDetail(props) {
         console.log(err)
       }
     }
+    socket.on('item-added-info', (msg, color) => {
+      console.log('Message w sockecie: ', msg)
+      setPopupInfo(msg);
+      setPopupColor(color);
+    })
     fetchProduct();
-  }, [props.shortName]);
+  }, []);
 
-  useEffect(() => {
-      const fetchCart = async () => {
-        try{
-          const response = await updateCartData(cart);
-          setInfo(response);
-          setError('');
-          window.location.reload();
-        }catch(err){
-          console.log(err)
-        }
-      }
-      if(cart.id && cart.size){
-        if(props.cart.products.length > 0 && props.cart.products.find(item => item.id == cart.id && item.size == cart.size)){
-          setError('This item is already in your cart');
-          return;
-        }else{
-          fetchCart();
-        }
-      }
-  }, [cart]);
+  const closePopup = () => {
+    setPopupInfo(null);
+    setPopupColor('');
+  };
+
+  /*useEffect(() => {
+    try{
+      socket.emit('add-to-cart', {id: product.id, size: sizeCart})
+      setInfo('Item added to cart')
+      setError('');
+    }catch(err){
+      console.log(err)
+    }
+  }, [cart]);*/
 
   const handleSize = (e) => {
     setSizeCart(e.target.value);
   }
 
-  const addToCart = () => {
-    setCart(prevState => ({...prevState, cartProductId: `${product.id}_${sizeCart}`,"_id": product._id, "id": product.id, "size": sizeCart, "quantity": 1, "fullPrice": product.price}))
+  const addToCart = async(e) => {
+    e.preventDefault()
+    try{
+      const cartItems = {
+        cartProductId: `${product.id}_${sizeCart}`,
+        "_id": product._id, 
+        "id": product.id, 
+        "size": sizeCart, 
+        "quantity": 1, 
+        "fullPrice": product.price
+      } 
+      socket.emit('add-to-cart', cartItems)
+    }catch(err){
+      console.log(err)
+    }
   }
 
   return (
@@ -91,14 +104,16 @@ function ProductDetail(props) {
                 )
               })}
             </div>
-            <p className="text-red-500">{error}</p>
             <p>Currently in stock: {count}</p>
+            {popupInfo && (
+              <Popup info={popupInfo} color={popupColor} onClose={closePopup} />
+            )}
           </div>
         </div>
       }
       <div className="flex justify-end gap-4">
         <button className="bg-gray-700 rounded-md p-[5px]">Buy Now</button>
-        <button className="bg-gray-700 rounded-md p-[5px]" onClick={addToCart}>Add To Cart</button>
+        <button className="bg-gray-700 rounded-md p-[5px]" onClick={e=>addToCart(e)}>Add To Cart</button>
       </div>
     </div>
   );

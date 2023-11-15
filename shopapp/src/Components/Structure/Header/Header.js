@@ -4,8 +4,20 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../../Images/logo-no-background.png';
 import Cart from './Cart';
 import '../../../index.css';
+import { useEffect, useState } from 'react';
+import { getSocket } from '../../../Services/getSocket';
 
 function Header(props) {
+  const [cart, setCart] = useState([]);
+  const socket = getSocket()
+  useEffect(() => {
+    socket.emit('get-cart')
+
+    socket.on('cart', (cart) => {
+      console.log(cart)
+      setCart(cart)
+    })
+  }, [])
   return (
     <header className="flex justify-between items-center p-5 sticky top-0" style={{background: 'rgb(41, 41, 41)'}}>
       <Link to={'/'}>
@@ -25,7 +37,7 @@ function Header(props) {
           Contact
         </Link>
         {props.data.length !== 0 && <p>Witaj, {props.data.nick}</p>}
-        <Cart cart={props.cart} />
+        <Cart cart={cart} />
         <Link to={props.data.length !== 0 ? '/u/dashboard' : '/login'}>
           <FontAwesomeIcon icon={faUser} />
         </Link>
