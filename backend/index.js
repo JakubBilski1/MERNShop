@@ -1,17 +1,18 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const dotenv = require('dotenv');
-dotenv.config();
+const initializeWebSocket = require('./websockets/cart_ws');
+const { createServer } = require('http');
 app.use(cookieParser());
 
 const AuthRoute = require('./routes/authRoute');
 const ProductRoute = require('./routes/productRoute');
 const UserRoute = require('./routes/userRoute');
 const DataRoute = require('./routes/dataRoute');
-const CartRoute = require('./routes/cartRoute');
 
 const port = 5000;
 
@@ -30,8 +31,11 @@ app.use("/auth", AuthRoute);
 app.use('/products', ProductRoute);
 app.use('/u', UserRoute);
 app.use('/d/', DataRoute)
-app.use('/c/', CartRoute)
 
-app.listen(port, () => {
+const server = createServer(app);
+
+initializeWebSocket(server);
+
+server.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);
 });
