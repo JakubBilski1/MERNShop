@@ -5,6 +5,8 @@ const verifySocketToken = require('../middlewares/verifySocketToken');
 const deleteFromCart = require('../services/deleteFromCart');
 const addToCartArray = require('../services/addToCartArray');
 const updateQuantityData = require('../services/updateQuantityData');
+const updateSettingsData = require('../services/updateSettingsData');
+const getSettingsData = require('../services/getSettingsData');
 
 const initializeWebSocket = (server) => {
     const io = new Server(server, {
@@ -64,6 +66,17 @@ const initializeWebSocket = (server) => {
                 await updateQuantityData(userEmail, cartDetails.quantityId, cartDetails.quantity, cartDetails.price)
                 const cart = await getCart(userEmail)
                 io.to(roomName).emit('cart', cart)
+            })
+
+            socket.on('update-settings', async(settings)=>{
+                const response = await updateSettingsData(userEmail, settings)
+                io.to(roomName).emit('is-settings-success', response)
+            })
+
+            socket.on('get-settings', async()=>{
+                const response = await getSettingsData(userEmail)
+                console.log(response)
+                io.to(roomName).emit('settings', response)
             })
 
             socket.on('disconnect', () => {
