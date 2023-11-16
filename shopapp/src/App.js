@@ -53,7 +53,7 @@ function App() {
   }, [])
   function ProductDetailWrapper(){
     const { shortName } = useParams();
-    return <ProductDetail shortName={shortName}/>
+    return <ProductDetail shortName={shortName} userData = {user ? user : null}/>
   }
 
   return (
