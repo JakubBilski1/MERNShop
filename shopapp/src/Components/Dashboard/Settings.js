@@ -3,14 +3,29 @@ import { getSocket } from '../../Services/getSocket';
 
 function Settings() {
   const socket = getSocket();
+  const [darkMode, setDarkMode] = useState(true);
   const [data, setData] = useState({
-    darkMode: true,
+    darkMode: darkMode,
     country: '',
     city: '',
     phone: '',
     dob: '',
   });
   const [info, setInfo] = useState('');
+
+  useEffect(() => {
+    socket.emit('get-settings');
+    socket.on('settings', (response) => {
+      setData({
+        darkMode: response.darkMode,
+        country: response.country,
+        city: response.city,
+        phone: response.phone,
+        dob: response.dob,
+      });
+      setDarkMode(response.darkMode);
+    });
+  }, [socket]);
 
   const handleChange = (e) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
@@ -29,20 +44,6 @@ function Settings() {
     });
   };
 
-  useEffect(() => {
-    socket.emit('get-settings');
-    socket.on('settings', (response) => {
-      // Use the response to initialize the form data
-      setData({
-        darkMode: response.darkMode,
-        country: response.country,
-        city: response.city,
-        phone: response.phone,
-        dob: response.dob,
-      });
-    });
-  }, [socket]);
-
   return (
     <form className="mt-4">
       <div className="mb-4">
@@ -50,10 +51,10 @@ function Settings() {
           Dark Mode
         </label>
         <label className="switch">
-          {console.log(data.darkMode)}
+          {console.log(darkMode)}
           <input 
             type="checkbox" 
-            defaultChecked={data.darkMode} 
+            defaultChecked={darkMode} 
             name="darkMode" 
             onChange={(e) => handleChange(e)}
           />
