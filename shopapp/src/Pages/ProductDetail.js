@@ -39,16 +39,6 @@ function ProductDetail(props) {
     setPopupColor('');
   };
 
-  /*useEffect(() => {
-    try{
-      socket.emit('add-to-cart', {id: product.id, size: sizeCart})
-      setInfo('Item added to cart')
-      setError('');
-    }catch(err){
-      console.log(err)
-    }
-  }, [cart]);*/
-
   const handleSize = (e) => {
     setSizeCart(e.target.value);
   }

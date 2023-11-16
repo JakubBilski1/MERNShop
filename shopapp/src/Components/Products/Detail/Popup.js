@@ -4,7 +4,7 @@ import { useSpring, animated } from 'react-spring';
 
 const Popup = ({ info, color, onClose }) => {
   const slideInAnimation = useSpring({
-    from: { transform: 'translateX(100%)' },
+    from: { transform: 'translateX(-100%)' },
     to: { transform: 'translateX(0)' },
   });
 
@@ -20,7 +20,7 @@ const Popup = ({ info, color, onClose }) => {
   return (
     <animated.div
       style={slideInAnimation}
-      className={`fixed top-4 right-4 p-4 rounded-md ${
+      className={`fixed top-4 left-4 p-4 rounded-md ${
         color === 'green' ? 'bg-green-500' : 'bg-red-500'
       } text-white`}
     >
