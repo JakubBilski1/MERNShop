@@ -21,6 +21,10 @@ function Cart(props) {
         >
         <Link to={'/cart'} className="hover:text-gray-500 transition duration-300 linear">
         <FontAwesomeIcon icon={faCartShopping} />
+        {props.cart.products && props.cart.products.length > 0 && (
+          <div className="absolute -top-2 -right-2 bg-red-500 rounded-full h-4 w-4 flex items-center justify-center text-white">
+            {props.cart.products.length}
+          </div>)}
         </Link>
         {isCartPopupVisible && (
             <Link to={'/cart'} className="absolute bg-gray-600 border p-4 shadow-md right-[-1vw] w-[15vw] flex flex-col gap-[1vh]">
