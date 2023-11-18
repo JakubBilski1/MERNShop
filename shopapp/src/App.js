@@ -33,18 +33,9 @@ function App() {
           console.log('connected')
         })
 
-        // socket.emit('get-cart')
-
-        // socket.on('cart', (cart) => {
-        //   console.log(cart)
-        //   setCart(cart)
-        // })
-
         const userResponse = await getUser()
         setUser(userResponse)
 
-        //const responseCart = await getCart()
-        //setCart(responseCart)
       }catch(err){
         console.log(err)
       }
@@ -72,7 +63,6 @@ function App() {
             <Route path={'/register'} element={<Register />}/>
             <Route path={'/u/dashboard'} element={<Dashboard />}/>
             <Route path={'/cart'} element={<Cart />}/>
-            {/* <Route path={'/cart'} element={<Cart cart={cart}/>}/> */}
           </Routes>
         </main>
         <Footer />
