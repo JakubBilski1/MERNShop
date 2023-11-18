@@ -60,6 +60,43 @@ function ProductDetail(props) {
     }
   }
 
+  const unloggedAddToCart = (e) => {
+    e.preventDefault();
+    const storageData = JSON.parse(window.localStorage.getItem('cart'));
+    console.log('wywolano');
+  
+    try {
+      const cartItems = {
+        cartProductId: `${product.id}_${sizeCart}`,
+        "name": product.title,
+        "image": product.image,
+        "id": product.id,
+        "size": sizeCart,
+        "quantity": 1,
+        "fullPrice": product.price
+      };
+  
+      if (storageData === null) {
+        window.localStorage.setItem('cart', JSON.stringify([cartItems]));
+        return;
+      }
+  
+      // Sprawdź, czy produkt o identycznym cartProductId już istnieje
+      const isDuplicate = storageData.some(item => item.cartProductId === cartItems.cartProductId);
+  
+      if (isDuplicate) {
+        console.log('duplikat');
+        return;
+      }
+  
+      // Jeśli nie ma duplikatu, dodaj nowy przedmiot do koszyka
+      window.localStorage.setItem('cart', JSON.stringify([...storageData, cartItems]));
+  
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="bg-gray-900 text-white p-4 h-full">
       {product &&
@@ -103,7 +140,8 @@ function ProductDetail(props) {
       }
       <div className="flex justify-end gap-4">
         <button className="bg-gray-700 rounded-md p-[5px]">Buy Now</button>
-        <button className="bg-gray-700 rounded-md p-[5px]" onClick={e=>addToCart(e)}>Add To Cart</button>
+        {console.log(props.userData)}
+        <button className="bg-gray-700 rounded-md p-[5px]" onClick={props.userData.length !== 0 ? e=>addToCart(e) : e=>unloggedAddToCart(e)}>Add To Cart</button>
       </div>
     </div>
   );
