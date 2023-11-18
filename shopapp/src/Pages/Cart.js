@@ -4,15 +4,14 @@ import { getSocket } from '../Services/getSocket';
 
 function Cart() {
   const [cart, setCart] = useState([]);
-  const storageCart = JSON.parse(localStorage.getItem('cart'));
   const socket = getSocket();
   const deleteProduct = (id, size) => {
     socket.emit('delete-product', { id, size })
   }
 
   useEffect(() => {
-    socket.emit('get-cart')
-
+    //socket.emit('get-cart')
+    socket.emit('get-cart-guest')
     socket.on('cart', (cart) => {
       console.log(cart)
       setCart(cart)
@@ -79,51 +78,9 @@ function Cart() {
                 </div>
               </div>
             )) : (
-              storageCart && storageCart.map((product) => (
-                <div to={`/products/p/${product.shortName}`} className="bg-gray-700 p-4 rounded shadow-md flex justify-between" key={product.id}>
-                  <Link to={`/products/p/${product.shortName}`} className="flex gap-4">
-                    <img
-                      src={`/Images/${product.image}`}
-                      alt={product.title}
-                      className="w-[100px] h-[100px] object-cover"
-                    />
-                    <div className="flex flex-col gap-2">
-                      <p className="text-lg font-semibold">{product.title}</p>
-                      <p className="text-lg font-semibold">
-                        {product.fullPrice}zł
-                      </p>
-                      <p>Size {product.size}</p>
-                    </div>
-                  </Link>
-                  <div className="flex gap-4">
-                    <div>
-                      <label className="flex gap-[0.5vw] items-center">Quantity:
-                        <select
-                          name="quantity"
-                          id=""
-                          className="bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline text-black h-[50%]"
-                          onChange={e => handleChange(e)}
-                        >
-                          <option value="" disabled selected>Select</option>
-                          {Array.from(Array(product.maxQuantity).keys()).map((quantity) => (
-                            <option
-                              value={`${quantity + 1},${product.price},${product.id}_${product.size}`}
-                              key={quantity + 1}
-                              className="text-black"
-                            >
-                              {quantity + 1}
-                            </option>
-                          ))}
-                        </select>
-                      </label>
-                      <p>Selected quantity: {product.quantity}</p>
-                    </div>
-                    <button className="bg-red-500 text-white px-4 py-2 rounded-md" onClick={() => deleteProduct(product.id, product.size)}>
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              ))
+              <div className="bg-gray-700 p-4 rounded shadow-md flex justify-between">
+                <p className="text-lg font-semibold text-white">Cart is empty</p>
+              </div>
             )}
         </div>
         <div>
