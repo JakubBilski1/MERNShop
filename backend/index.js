@@ -14,7 +14,6 @@ const AuthRoute = require('./routes/authRoute');
 const ProductRoute = require('./routes/productRoute');
 const UserRoute = require('./routes/userRoute');
 const DataRoute = require('./routes/dataRoute');
-const initializeGuestCartWebSocket = require('./websockets/guest_cart_ws');
 
 const port = 5000;
 
@@ -43,7 +42,6 @@ app.use(expressSession({
 const server = createServer(app);
 
 initializeWebSocket(server);
-initializeGuestCartWebSocket(server);
 
 server.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);
