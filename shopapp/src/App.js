@@ -21,17 +21,11 @@ import { getSocket } from './Services/getSocket';
 function App() {
   const [data, setData] = useState([])
   const [user, setUser] = useState([])
-  //const [cart, setCart] = useState([])
-  const socket = getSocket()
   useEffect(() => {
     const fetchData = async () => {
       try{
         const productsResponse = await getProducts()
         setData(productsResponse)
-
-        socket.on('connect', () => {
-          console.log('connected')
-        })
 
         const userResponse = await getUser()
         setUser(userResponse)
