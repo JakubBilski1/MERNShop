@@ -2,6 +2,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
 const app = express();
+const expressSession = require('express-session');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
@@ -32,6 +33,12 @@ app.use("/auth", AuthRoute);
 app.use('/products', ProductRoute);
 app.use('/u', UserRoute);
 app.use('/d/', DataRoute)
+
+app.use(expressSession({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true
+}));
 
 const server = createServer(app);
 
