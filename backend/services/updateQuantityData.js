@@ -1,8 +1,5 @@
 const dbConnect = require('./dbConnect');
-
-const roundToTwoDecimals = (number) => {
-    return Math.round(number * 100) / 100;
-};
+const roundToTwoDecimals = require('./roundToTwoDecimals')
 
 const updateQuantityData = async (email, id, quantity, inpPrice) => {
     try{
