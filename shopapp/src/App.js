@@ -62,7 +62,7 @@ function App() {
             <Route path={`/login`} element={<Login />}/>
             <Route path={'/register'} element={<Register />}/>
             <Route path={'/u/dashboard'} element={<Dashboard />}/>
-            <Route path={'/cart'} element={<Cart />}/>
+            <Route path={'/cart'} element={<Cart user={user ? user : []}/>}/>
           </Routes>
         </main>
         <Footer />

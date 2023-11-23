@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getSocket } from '../Services/getSocket';
 
-function Cart() {
+function Cart(props) {
   const [cart, setCart] = useState([]);
   const socket = getSocket();
   const deleteProduct = (id, size) => {
@@ -13,7 +13,7 @@ function Cart() {
     //socket.emit('get-cart')
     socket.emit('get-cart-guest')
     socket.on('cart', (cart) => {
-      console.log(cart)
+      console.log('cart', cart)
       setCart(cart)
     })
   }, [])
