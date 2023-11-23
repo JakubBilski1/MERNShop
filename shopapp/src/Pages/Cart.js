@@ -6,17 +6,17 @@ function Cart(props) {
   const [cart, setCart] = useState([]);
   const socket = getSocket();
   const deleteProduct = (id, size) => {
-    socket.emit('delete-product', { id, size })
+    props.user.length!==0 ? socket.emit('delete-product', { id, size }) : socket.emit('delete-product-guest', { id, size })
   }
 
   useEffect(() => {
-    //socket.emit('get-cart')
-    socket.emit('get-cart-guest')
+    props.user.length!==0 ? socket.emit('get-cart') : socket.emit('get-cart-guest')
     socket.on('cart', (cart) => {
-      console.log('cart', cart)
       setCart(cart)
     })
   }, [])
+
+  console.log(props.user)
 
   const handleChange = async(e) => {
     const cartDetails = {
@@ -24,8 +24,7 @@ function Cart(props) {
       quantityId: e.target.value.split(',')[2],
       price: e.target.value.split(',')[1]
     }
-    console.log(cartDetails)
-    await socket.emit('update-quantity', cartDetails)
+    props.user.length!==0 ? await socket.emit('update-quantity', cartDetails) : await socket.emit('update-quantity-guest', cartDetails)
   }
   return (
     <div className="flex items-center justify-center bg-gray-800 text-white">
