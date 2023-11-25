@@ -36,7 +36,10 @@ app.use('/d/', DataRoute)
 app.use(expressSession({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: {
+    secure: false,
+  }
 }));
 
 const server = createServer(app);
