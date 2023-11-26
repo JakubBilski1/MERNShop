@@ -2,8 +2,7 @@ const argon2 = require('argon2');
 const dbConnect = require('./dbConnect');
 
 const register = async (req, res) => {
-    const sessionId = req.sessionID;
-    console.log(sessionId)
+    console.log(req.sessionID)
     let result, guestCart
     const cartToSend = []
     const db = await dbConnect();
@@ -11,7 +10,7 @@ const register = async (req, res) => {
     const { email, nick } = req.body.data;
     const collection = db.collection('Users');
     const guestCol = db.collection('CartForGuests');
-    const guestQuery = {userId: sessionId};
+    /*const guestQuery = {userId: sessionId};
     const guestArr = await guestCol.find(guestQuery).toArray();
     if(guestArr.length !== 0){
       guestCart = guestArr[0].cart
@@ -37,7 +36,7 @@ const register = async (req, res) => {
       }
 
       res.json({ userData, redirectTo: '/login' });
-    }
+    }*/
 }
 
 module.exports = register;
