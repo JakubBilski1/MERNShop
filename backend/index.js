@@ -7,7 +7,15 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const initializeWebSocket = require('./websockets/cart_ws');
+const MemoryStore = require('memorystore')(expressSession);
 const { createServer } = require('http');
+app.use(expressSession({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { path: '/', httpOnly: true, secure: false, maxAge: null },
+  store: new MemoryStore()
+}));
 app.use(cookieParser());
 
 const AuthRoute = require('./routes/authRoute');
@@ -31,16 +39,12 @@ app.use(cors(corsOptions));
 app.use("/auth", AuthRoute);
 app.use('/products', ProductRoute);
 app.use('/u', UserRoute);
-app.use('/d/', DataRoute)
+app.use('/d', DataRoute)
 
-app.use(expressSession({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    secure: false,
-  }
-}));
+app.get('/', (req, res) => {
+  const id = req.sessionID;
+  res.send(`Hello World! ${id}`);
+})
 
 const server = createServer(app);
 
